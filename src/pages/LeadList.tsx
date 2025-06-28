@@ -255,8 +255,8 @@ const handleValueChange = (index, e) => {
          <label htmlFor="">All conditions (AND)</label>
         <input type="radio"
          name="match"
-      value="AND"
-      checked={filterLogic === "AND"}
+      value="OR"
+      checked={filterLogic === "OR"}
       onChange={(e) => setFilterLogic(e.target.value)} id="" />
          <label htmlFor="">Any condition (OR)</label>
       </div>
@@ -295,7 +295,7 @@ const handleValueChange = (index, e) => {
   </div>
 ))}
 
- <button
+ <button 
   onClick={addFilter}
   className="mt-4 bg-blue-600 text-white px-4 py-2 rounded-md"
 >
