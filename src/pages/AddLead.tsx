@@ -1,7 +1,16 @@
 import { useState } from "react";
 import {NavLink} from "react-router-dom"
 import React from 'react'
+interface ImportMetaEnv {
+  readonly VITE_API_URL: string;
+  
+}
 
+declare global {
+  interface ImportMeta {
+    readonly env: ImportMetaEnv;
+  }
+}
 interface FormData {
   name: string;
   phone: string;
@@ -194,7 +203,7 @@ const handleChange = (e) => {
       status: formData.status,
     };
       try {
-        const response = await fetch("http://localhost:3000/api/v1/lead/add", {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/lead/add`, {
           method: "POST",
           headers: {
           "Content-Type": "application/json",

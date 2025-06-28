@@ -1,3 +1,15 @@
+
+interface ImportMetaEnv {
+  readonly VITE_API_URL: string;
+  
+}
+
+declare global {
+  interface ImportMeta {
+    readonly env: ImportMetaEnv;
+  }
+}
+
 import React,{useEffect,useState,useCallback} from 'react'
 import "primereact/resources/themes/lara-light-blue/theme.css"; // Theme
 import "primereact/resources/primereact.min.css"; // Core CSS
@@ -33,10 +45,11 @@ const [filterLogic, setFilterLogic] = useState("AND");
   const handleRefresh = () => {
     window.location.reload();
   };
- const handleDelete = async (id) => {
+ 
+ const handleDelete = async (id:Number) => {
   try {
     const response = await fetch(
-      `http://localhost:3000/api/v1/lead/delete/${id}`,
+      `${import.meta.env.VITE_API_URL}/api/v1/lead/delete/${id}`,
       {
         method: "DELETE",
       }
@@ -81,7 +94,7 @@ const [filterLogic, setFilterLogic] = useState("AND");
 
     try {
       const response = await fetch(
-        `http://localhost:3000/api/v1/lead/get`
+        `${import.meta.env.VITE_API_URL}/api/v1/lead/get`
       );
       if (!response.ok) throw new Error("Failed to fetch leads");
 
