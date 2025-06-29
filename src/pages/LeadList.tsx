@@ -42,6 +42,18 @@ const [filterLogic, setFilterLogic] = useState("AND");
     apieEmailError: "",
     serverError: "",
   });
+  const allowedFilterFields = [
+  "status",
+  "qualification",
+  "interestField",
+  "source",
+  "assignedTo",
+  "jobInterest",
+  "state",
+  "city",
+  "passoutYear"
+];
+
   const handleRefresh = () => {
     window.location.reload();
   };
@@ -107,10 +119,13 @@ const [filterLogic, setFilterLogic] = useState("AND");
       setLoading(false);
     }
   }, []);
+ 
+
 
   
   useEffect(() => {
     fetchData();
+   
   }, [fetchData]);
 const handleSearchChange = (e) => {
   const searchValue = e.target.value.toLowerCase(); // Normalize once
@@ -269,11 +284,11 @@ const handleValueChange = (index, e) => {
       className="p-3 w-44 text-gray-800 border border-gray-300 rounded focus:outline-blue-500"
     >
       <option value="">Select Field</option>
-      {Object.keys(leads[0] || {}).map((key) => (
-        <option key={key} value={key}>
-          {key.replace(/([A-Z])/g, ' $1').replace(/^./, (str) => str.toUpperCase())}
-        </option>
-      ))}
+     {allowedFilterFields.map((key) => (
+  <option key={key} value={key}>
+    {key.replace(/([A-Z])/g, ' $1').replace(/^./, (str) => str.toUpperCase())}
+  </option>
+))}
     </select>
 
     {filter.field && (
